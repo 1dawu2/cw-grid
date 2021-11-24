@@ -1,0 +1,51 @@
+{
+    "id": "com.grid",
+    "version": "1.0.0",
+    "name": "Grid",
+    "description": "Grid Widget",
+    "newInstancePrefix": "GridWidget",
+    "icon": "https://1dawu2.github.io/cw-grid/icon.png",
+    "vendor": "IFM",
+    "eula": "",
+    "license": "",
+    "webcomponents": [
+        {
+            "kind": "main",
+            "tag": "com-grid-main",
+            "url": "https://1dawu2.github.io/cw-grid/grid.js",
+            "integrity": "",
+            "ignoreIntegrity": true
+        },
+        {
+            "kind": "styling",
+            "tag": "com-grid-styling",
+            "url": "https://1dawu2.github.io/cw-grid/grid_styling.js",
+            "integrity": "",
+            "ignoreIntegrity": true
+        },
+        {
+            "kind": "builder",
+            "tag": "com-grid-builder",
+            "url": "https://1dawu2.github.io/cw-grid/grid_builder.js",
+            "integrity": "",
+            "ignoreIntegrity": true
+        }
+    ],
+    "properties": {
+
+    },
+    "methods": {
+        "render": {
+            "description": "Render",
+            "parameters": [
+                {
+                    "name": "resultSet",
+                    "type": "any",
+                    "description": "The json"
+                }
+            ]
+        }
+    },
+    "events": {},
+    "imports": []
+}
