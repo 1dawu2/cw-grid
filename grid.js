@@ -52,13 +52,28 @@ var getScriptPromisify = (src) => {
             const dates = []
             const values = []
             const dataSet = []
-            const columns = []
-            columns.push("Date");
-            columns.push("Volume");
+            const columns = [
+                {
+                    id: "dates",
+                    name: "Date"
+                }, 
+                {
+                    id: 'measure',
+                    name: 'Volume'
+                }
+            ]
             console.log(resultSet);
+            var tmpData
             resultSet.forEach(dp => {
                 const { rawValue, description } = dp[MEASURE_DIMENSION]
                 const date = dp.Date.description
+
+                 tmpData = {
+                    "dates" : date,
+                    "measure" : description
+                }
+
+                dataSet.push(tmpData);
 
                 if (dates.indexOf(date) === -1) {
                     dates.push(date);
@@ -83,9 +98,12 @@ var getScriptPromisify = (src) => {
 
             new gridjs.Grid({
                 columns: columns,
-                data: data,
+                data: dataSet,
                 search: {
                     enabled: true
+                },
+                pagination: {
+                    limit: 1
                 },
                 sort: true
             }).render(this._root.querySelector('#example'));
