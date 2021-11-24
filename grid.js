@@ -33,6 +33,7 @@ var getScriptPromisify = (src) => {
         this._shadowRoot.appendChild(template.content.cloneNode(true))
 
         this._root = this._shadowRoot.getElementById('root')
+        this._example = this._root.querySelector('#example')
 
         this._props = {}
     }
@@ -78,13 +79,15 @@ var getScriptPromisify = (src) => {
         console.log(data);
         console.log(dataSet);
 
-        var datatable = new DataTable('#example', {
-            columns: ['Year', 'Volume'],
-            data: [
-              ['2021', '1200'],
-              ['2022', '1400'],
-            ]
-          });        
+        if (this._example) {
+            var datatable = new DataTable(this_example, {
+                columns: ['Year', 'Volume'],
+                data: [
+                  ['2021', '1200'],
+                  ['2022', '1400'],
+                ]
+              });
+        }        
 
     }
 
