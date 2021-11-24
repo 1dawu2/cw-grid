@@ -7,6 +7,7 @@ var getScriptPromisify = (src) => {
 (function () {
     let template = document.createElement("template");
     template.innerHTML = `
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
     <style>
     #root {
       background-color: #fff;
@@ -38,7 +39,7 @@ var getScriptPromisify = (src) => {
         }
 
         async render(resultSet) {
-            await getScriptPromisify('https://unpkg.com/cheetah-grid@1.1')
+            await getScriptPromisify('https://cdn.jsdelivr.net/npm/simple-datatables@latest')
 
 
             this._placeholder = this._root.querySelector('#placeholder')
@@ -76,28 +77,19 @@ var getScriptPromisify = (src) => {
             console.log(data);
             console.log(dataSet);
 
-            const grid = new cheetahGrid.ListGrid({
-                // Parent element on which to place the grid
-                parentElement: this._root.querySelector('#example'),
-                header: [
-                    { field: 'personid', caption: 'ID', width: '100%' },
-                    { field: 'fname', caption: 'First Name', width: '100%' },
-                    { field: 'lname', caption: 'Last Name', width: '100%' },
-                    { field: 'email', caption: 'Email', width: '100%' },
-                ],
-            });
-            grid.records = [
-                {'personid': 1, 'fname': 'Sophia', 'lname': 'Hill', 'email': 'sophia_hill@example.com'},
-                {'personid': 2, 'fname': 'Aubrey', 'lname': 'Martin', 'email': 'aubrey_martin@example.com'},
-                {'personid': 3, 'fname': 'Avery', 'lname': 'Jones', 'email': 'avery_jones@example.com'},
-                {'personid': 4, 'fname': 'Joseph', 'lname': 'Rodriguez', 'email': 'joseph_rodriguez@example.com'},
-                {'personid': 5, 'fname': 'Samuel', 'lname': 'Campbell', 'email': 'samuel_campbell@example.com'},
-                {'personid': 6, 'fname': 'Joshua', 'lname': 'Ortiz', 'email': 'joshua_ortiz@example.com'},
-                {'personid': 7, 'fname': 'Mia', 'lname': 'Foster', 'email': 'mia_foster@example.com'},
-                {'personid': 8, 'fname': 'Landon', 'lname': 'Lopez', 'email': 'landon_lopez@example.com'},
-                {'personid': 9, 'fname': 'Audrey', 'lname': 'Cox', 'email': 'audrey_cox@example.com'},
-                {'personid': 10, 'fname': 'Anna', 'lname': 'Ramirez', 'email': 'anna_ramirez@example.com'}
-              ];
+            const myTable = this._root.querySelector('#example');
+            const dataTable = new DataTable(myTable)
+
+            let newData = {
+                headings: ["Heading 1", "Heading 2", "Heading 3", "Heading 4"],
+                data: [
+                    ["Cell 1", "Cell 2", "Cell 3", "Cell 4"],
+                    ["Cell 5", "Cell 6", "Cell 7", "Cell 8"],
+                    ["Cell 9", "Cell 10", "Cell 11", "Cell 12"]
+                ]
+            };
+            
+            dataTable.insert(newData);
 
         }
 
