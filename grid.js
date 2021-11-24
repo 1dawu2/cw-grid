@@ -7,7 +7,7 @@ var getScriptPromisify = (src) => {
 (function () {
     let template = document.createElement("template");
     template.innerHTML = `
-    <link href="https://unpkg.com/frappe-datatable@0.0.5/dist/frappe-datatable.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
     <style>
     #root {
       background-color: #fff;
@@ -39,9 +39,7 @@ var getScriptPromisify = (src) => {
     }
 
     async render(resultSet) {
-        await getScriptPromisify('https://unpkg.com/sortablejs@1.7.0/Sortable.min.js')
-        await getScriptPromisify('https://unpkg.com/clusterize.js@0.18.0/clusterize.min.js')
-        await getScriptPromisify('https://unpkg.com/frappe-datatable@0.0.5/dist/frappe-datatable.min.js')
+        await getScriptPromisify('https://cdn.jsdelivr.net/npm/simple-datatables@latest')
 
 
         this._placeholder = this._root.querySelector('#placeholder')
@@ -79,15 +77,42 @@ var getScriptPromisify = (src) => {
         console.log(data);
         console.log(dataSet);
 
-        if (this._example) {
-            var datatable = new DataTable(this_example, {
-                columns: ['Year', 'Volume'],
-                data: [
-                  ['2021', '1200'],
-                  ['2022', '1400'],
+        let myData = {
+            "headings": [
+                "Name",
+                "Company",
+                "Ext.",
+                "Start Date",
+                "Email",
+                "Phone No."
+            ],
+            "data": [
+                [
+                    "Hedwig F. Nguyen",
+                    "Arcu Vel Foundation",
+                    "9875",
+                    "03/27/2017",
+                    "nunc.ullamcorper@metusvitae.com",
+                    "070 8206 9605"
+                ],
+                [
+                    "Genevieve U. Watts",
+                    "Eget Incorporated",
+                    "9557",
+                    "07/18/2017",
+                    "Nullam.vitae@egestas.edu",
+                    "0800 106980"
                 ]
-              });
-        }        
+            ]
+        };
+        
+
+        var dataTable = new DataTable(this._example, {
+            searchable: false,
+            fixedHeight: true,
+            data: myData
+            
+        });    
 
     }
 
