@@ -7,7 +7,6 @@ var getScriptPromisify = (src) => {
 (function () {
     let template = document.createElement("template");
     template.innerHTML = `
-    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
     <style>
     #root {
       background-color: #fff;
@@ -39,7 +38,7 @@ var getScriptPromisify = (src) => {
     }
 
     async render(resultSet) {
-        await getScriptPromisify('https://cdn.jsdelivr.net/npm/simple-datatables@latest')
+        await getScriptPromisify('https://unpkg.com/cheetah-grid@1.1')
 
 
         this._placeholder = this._root.querySelector('#placeholder')
@@ -77,42 +76,22 @@ var getScriptPromisify = (src) => {
         console.log(data);
         console.log(dataSet);
 
-        let myData = {
-            "headings": [
-                "Name",
-                "Company",
-                "Ext.",
-                "Start Date",
-                "Email",
-                "Phone No."
+        const grid = new cheetahGrid.ListGrid({
+            // Parent element on which to place the grid
+            parentElement: this._root.querySelector('#example'),
+            // Header definition
+            header: [
+              {field: 'check', caption: '', width: 50, columnType: 'check', action: 'check'},
+              {field: 'personid', caption: 'ID', width: 100},
+              {field: 'fname', caption: 'First Name', width: 200},
+              {field: 'lname', caption: 'Last Name', width: 200},
+              {field: 'email', caption: 'Email', width: 250},
             ],
-            "data": [
-                [
-                    "Hedwig F. Nguyen",
-                    "Arcu Vel Foundation",
-                    "9875",
-                    "03/27/2017",
-                    "nunc.ullamcorper@metusvitae.com",
-                    "070 8206 9605"
-                ],
-                [
-                    "Genevieve U. Watts",
-                    "Eget Incorporated",
-                    "9557",
-                    "07/18/2017",
-                    "Nullam.vitae@egestas.edu",
-                    "0800 106980"
-                ]
-            ]
-        };
-        
-
-        var dataTable = new DataTable('#example', {
-            searchable: false,
-            fixedHeight: true,
-            data: myData
-            
-        });    
+            // Array data to be displayed on the grid
+            records,
+            // Column fixed position
+            frozenColCount: 2,
+          });  
 
     }
 
