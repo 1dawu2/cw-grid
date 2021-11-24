@@ -80,10 +80,10 @@ var getScriptPromisify = (src) => {
                 // Parent element on which to place the grid
                 parentElement: this._root.querySelector('#example'),
                 header: [
-                    { field: 'personid', caption: 'ID', width: 100% },
-                    { field: 'fname', caption: 'First Name', width: 100% },
-                    { field: 'lname', caption: 'Last Name', width: 100% },
-                    { field: 'email', caption: 'Email', width: 100% },
+                    { field: 'personid', caption: 'ID', width: '100%' },
+                    { field: 'fname', caption: 'First Name', width: '100%' },
+                    { field: 'lname', caption: 'Last Name', width: '100%' },
+                    { field: 'email', caption: 'Email', width: '100%' },
                 ],
             });
             grid.records = [
