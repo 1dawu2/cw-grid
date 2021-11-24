@@ -83,14 +83,12 @@ var getScriptPromisify = (src) => {
         console.log(data);
         console.log(dataSet);
 
-        $(document).ready(function() {
-            $('#example').DataTable( {
-                data: dataSet,
-                columns: [
-                    { title: "Year" },
-                    { title: "Volume" }
-                ]
-            } );
+        let table = new DataTable('#example', {
+            data: dataSet,
+            columns: [
+                { title: "Year" },
+                { title: "Volume" }               
+            ]
         } );
 
     }
