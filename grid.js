@@ -81,8 +81,8 @@ var getScriptPromisify = (src) => {
         const datatable = new DataTable('#datatable', {
             columns: ['Year', 'Volume'],
             data: [
-              ['Faris', 'Software Developer', '$1200'],
-              ['Manas', 'Software Engineer', '$1400'],
+              ['2021', '1200'],
+              ['2022', '1400'],
             ]
           });        
 
