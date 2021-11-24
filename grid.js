@@ -20,6 +20,7 @@ var getScriptPromisify = (src) => {
     </style>
     <div id="root" style="width: 100%; height: 100%;">
         <div id="placeholder">Grid Layout</div>
+        <div id="example"></div>
     </div>
  `;
 
@@ -37,7 +38,7 @@ var getScriptPromisify = (src) => {
 
     async render(resultSet) {
         await getScriptPromisify('https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js')
-        await getScriptPromisify('https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css')
+        //await getScriptPromisify('https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css')
 
         this._placeholder = this._root.querySelector('#placeholder')
         if (this._placeholder) {
@@ -56,6 +57,7 @@ var getScriptPromisify = (src) => {
         const MEASURE_DIMENSION = 'Account'
         const dates = []
         const values = []
+        const dataSet = []
         console.log(resultSet);
         resultSet.forEach(dp => {
             const { rawValue, description } = dp[MEASURE_DIMENSION]
@@ -63,10 +65,12 @@ var getScriptPromisify = (src) => {
 
             if (dates.indexOf(date) === -1) {
                 dates.push(date);
+                dataSet.push(date);
             }
 
             if (description === 'Volume') {
                 values.push(rawValue);
+                dataSet.push(rawValue);
             }
 
         })
@@ -77,6 +81,11 @@ var getScriptPromisify = (src) => {
         }
 
         console.log(data);
+        console.log(dataSet);
+
+        $(document).ready(function() {
+            $('#example').DataTable();
+        } );
 
 
     }
