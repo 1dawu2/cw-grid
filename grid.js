@@ -7,7 +7,7 @@ var getScriptPromisify = (src) => {
 (function () {
     let template = document.createElement("template");
     template.innerHTML = `
-    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
     <style>
     #root {
       background-color: #fff;
@@ -39,7 +39,7 @@ var getScriptPromisify = (src) => {
         }
 
         async render(resultSet) {
-            await getScriptPromisify('https://cdn.jsdelivr.net/npm/simple-datatables@latest')
+            await getScriptPromisify('https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.umd.js')
 
 
             this._placeholder = this._root.querySelector('#placeholder')
@@ -77,19 +77,16 @@ var getScriptPromisify = (src) => {
             console.log(data);
             console.log(dataSet);
 
-            const myTable = this._root.querySelector('#example');
-            const dataTable = new DataTable(myTable)
-
-            let newData = {
-                headings: ["Heading 1", "Heading 2", "Heading 3", "Heading 4"],
+            new gridjs.Grid({
+                columns: ["Name", "Email", "Phone Number"],
                 data: [
-                    ["Cell 1", "Cell 2", "Cell 3", "Cell 4"],
-                    ["Cell 5", "Cell 6", "Cell 7", "Cell 8"],
-                    ["Cell 9", "Cell 10", "Cell 11", "Cell 12"]
+                  ["John", "john@example.com", "(353) 01 222 3333"],
+                  ["Mark", "mark@gmail.com", "(01) 22 888 4444"],
+                  ["Eoin", "eoin@gmail.com", "0097 22 654 00033"],
+                  ["Sarah", "sarahcdd@gmail.com", "+322 876 1233"],
+                  ["Afshin", "afshin@mail.com", "(353) 22 87 8356"]
                 ]
-            };
-            
-            dataTable.insert(newData);
+              }).render(this._root.querySelector('#example'));
 
         }
 
