@@ -21,7 +21,7 @@ var getScriptPromisify = (src) => {
     </style>
     <div id="root" style="width: 100%; height: 100%;">
         <div id="placeholder">Grid Layout</div>
-        <div class="datatable"></div>
+        <div id="example"></div>
     </div>
  `;
 
@@ -78,7 +78,7 @@ var getScriptPromisify = (src) => {
         console.log(data);
         console.log(dataSet);
 
-        const datatable = new DataTable('.datatable', {
+        var datatable = new DataTable('#example', {
             columns: ['Year', 'Volume'],
             data: [
               ['2021', '1200'],
