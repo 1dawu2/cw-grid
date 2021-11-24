@@ -1,12 +1,13 @@
 var getScriptPromisify = (src) => {
     return new Promise(resolve => {
-        $.getScript(src, resolve)
+        $.getScript(src, resolve)        
     })
 }
 
 (function () {
     let template = document.createElement("template");
     template.innerHTML = `
+    <link href="https://unpkg.com/frappe-datatable@0.0.5/dist/frappe-datatable.min.css" rel="stylesheet">
     <style>
     #root {
       background-color: #fff;
@@ -20,7 +21,7 @@ var getScriptPromisify = (src) => {
     </style>
     <div id="root" style="width: 100%; height: 100%;">
         <div id="placeholder">Grid Layout</div>
-        <div id="example"></div>
+        <div id="datatable"></div>
     </div>
  `;
 
@@ -37,22 +38,16 @@ var getScriptPromisify = (src) => {
     }
 
     async render(resultSet) {
-        await getScriptPromisify('https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js')
-        //await getScriptPromisify('https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css')
+        await getScriptPromisify('https://unpkg.com/sortablejs@1.7.0/Sortable.min.js')
+        await getScriptPromisify('https://unpkg.com/clusterize.js@0.18.0/clusterize.min.js')
+        await getScriptPromisify('https://unpkg.com/frappe-datatable@0.0.5/dist/frappe-datatable.min.js')
+
 
         this._placeholder = this._root.querySelector('#placeholder')
         if (this._placeholder) {
             this._root.removeChild(this._placeholder)
             this._placeholder = null
         }
-
-        /*
-        if (this._myChart) {
-            echarts.dispose(this._myChart)
-        }
-        var myChart = this._myChart = echarts.init(this._root, 'shine')
-        */
-
 
         const MEASURE_DIMENSION = 'Account'
         const dates = []
@@ -90,6 +85,14 @@ var getScriptPromisify = (src) => {
                 { title: "Volume" }               
             ]
         } );
+
+        const datatable = new DataTable('#datatable', {
+            columns: ['Year', 'Volume'],
+            data: [
+              ['Faris', 'Software Developer', '$1200'],
+              ['Manas', 'Software Engineer', '$1400'],
+            ]
+          });        
 
     }
 
