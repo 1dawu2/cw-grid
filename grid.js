@@ -83,8 +83,12 @@ var getScriptPromisify = (src) => {
 
             new gridjs.Grid({
                 columns: columns,
-                data: dataSet
-              }).render(this._root.querySelector('#example'));
+                data: data,
+                search: {
+                    enabled: true
+                },
+                sort: true
+            }).render(this._root.querySelector('#example'));
 
         }
 
