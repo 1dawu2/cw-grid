@@ -107,7 +107,7 @@ var getScriptPromisify = (src) => {
         };
         
 
-        var dataTable = new DataTable(this._example, {
+        var dataTable = new DataTable('#example', {
             searchable: false,
             fixedHeight: true,
             data: myData
