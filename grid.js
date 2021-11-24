@@ -70,19 +70,17 @@ var getScriptPromisify = (src) => {
 
                  tmpData = {
                     "dates" : date,
-                    "measure" : description
+                    "measure" : rawValue
                 }
 
                 dataSet.push(tmpData);
 
                 if (dates.indexOf(date) === -1) {
                     dates.push(date);
-                    dataSet.push(date);
+                    
                 }
-
                 if (description === 'Volume') {
                     values.push(rawValue);
-                    dataSet.push(rawValue);
                 }
 
             })
