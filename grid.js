@@ -79,28 +79,27 @@ var getScriptPromisify = (src) => {
             const grid = new cheetahGrid.ListGrid({
                 // Parent element on which to place the grid
                 parentElement: this._root.querySelector('#example'),
-                // Header definition
                 header: [
                     { field: 'personid', caption: 'ID', width: 100 },
                     { field: 'fname', caption: 'First Name', width: 200 },
                     { field: 'lname', caption: 'Last Name', width: 200 },
                     { field: 'email', caption: 'Email', width: 250 },
                 ],
-                // Array data to be displayed on the grid
-                records: [
-                    { 'personid': 1, 'fname': 'Sophia', 'lname': 'Hill', 'email': 'sophia_hill@example.com' },
-                    { 'personid': 2, 'fname': 'Aubrey', 'lname': 'Martin', 'email': 'aubrey_martin@example.com' },
-                    { 'personid': 3, 'fname': 'Avery', 'lname': 'Jones', 'email': 'avery_jones@example.com' },
-                    { 'personid': 4, 'fname': 'Joseph', 'lname': 'Rodriguez', 'email': 'joseph_rodriguez@example.com' },
-                    { 'personid': 5, 'fname': 'Samuel', 'lname': 'Campbell', 'email': 'samuel_campbell@example.com' },
-                    { 'personid': 6, 'fname': 'Joshua', 'lname': 'Ortiz', 'email': 'joshua_ortiz@example.com' },
-                    { 'personid': 7, 'fname': 'Mia', 'lname': 'Foster', 'email': 'mia_foster@example.com' },
-                    { 'personid': 8, 'fname': 'Landon', 'lname': 'Lopez', 'email': 'landon_lopez@example.com' },
-                    { 'personid': 9, 'fname': 'Audrey', 'lname': 'Cox', 'email': 'audrey_cox@example.com' },
-                    { 'personid': 10, 'fname': 'Anna', 'lname': 'Ramirez', 'email': 'anna_ramirez@example.com' }
-                ],        
-            frozenColCount: 2,
+                frozenColCount: 1,
+
             });
+            grid.records = [
+                {'personid': 1, 'fname': 'Sophia', 'lname': 'Hill', 'email': 'sophia_hill@example.com'},
+                {'personid': 2, 'fname': 'Aubrey', 'lname': 'Martin', 'email': 'aubrey_martin@example.com'},
+                {'personid': 3, 'fname': 'Avery', 'lname': 'Jones', 'email': 'avery_jones@example.com'},
+                {'personid': 4, 'fname': 'Joseph', 'lname': 'Rodriguez', 'email': 'joseph_rodriguez@example.com'},
+                {'personid': 5, 'fname': 'Samuel', 'lname': 'Campbell', 'email': 'samuel_campbell@example.com'},
+                {'personid': 6, 'fname': 'Joshua', 'lname': 'Ortiz', 'email': 'joshua_ortiz@example.com'},
+                {'personid': 7, 'fname': 'Mia', 'lname': 'Foster', 'email': 'mia_foster@example.com'},
+                {'personid': 8, 'fname': 'Landon', 'lname': 'Lopez', 'email': 'landon_lopez@example.com'},
+                {'personid': 9, 'fname': 'Audrey', 'lname': 'Cox', 'email': 'audrey_cox@example.com'},
+                {'personid': 10, 'fname': 'Anna', 'lname': 'Ramirez', 'email': 'anna_ramirez@example.com'}
+              ];
 
         }
 
