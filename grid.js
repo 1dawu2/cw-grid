@@ -78,14 +78,6 @@ var getScriptPromisify = (src) => {
         console.log(data);
         console.log(dataSet);
 
-        let table = new DataTable('#example', {
-            data: dataSet,
-            columns: [
-                { title: "Year" },
-                { title: "Volume" }               
-            ]
-        } );
-
         const datatable = new DataTable('#datatable', {
             columns: ['Year', 'Volume'],
             data: [
