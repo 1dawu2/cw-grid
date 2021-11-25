@@ -7,6 +7,9 @@ var getScriptPromisify = (src) => {
 (function () {
     let template = document.createElement("template");
     template.innerHTML = `
+    <link rel="stylesheet" href="/node_modules/ag-grid-community/dist/styles/webfont/agGridClassicFont.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-grid.css">
+    <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-theme-alpine.css">    
     <div id="root" style="width: 100%; height: 100%;">
         <div id="placeholder">Grid Layout</div>
         <button onclick="onBtPrint()">Print</button>
@@ -28,7 +31,7 @@ var getScriptPromisify = (src) => {
 
         async render(resultSet) {
             
-            await getScriptPromisify('https://unpkg.com/ag-grid-enterprise/dist/ag-grid-enterprise.js')
+            await getScriptPromisify('https://unpkg.com/ag-grid-enterprise/dist/ag-grid-enterprise.min.noStyle.js')
            // await getScriptPromisify('https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.noStyle.js')
 
 
