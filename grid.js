@@ -28,7 +28,7 @@ var getScriptPromisify = (src) => {
 
         async render(resultSet) {
             
-            await getScriptPromisify('https://unpkg.com/ag-grid-enterprise/dist/ag-grid-enterprise.min.noStyle.js')
+            await getScriptPromisify('https://unpkg.com/ag-grid-enterprise/dist/ag-grid-enterprise.js')
            // await getScriptPromisify('https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.noStyle.js')
 
 
