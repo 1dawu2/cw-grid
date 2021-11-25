@@ -77,7 +77,6 @@ var getScriptPromisify = (src) => {
 
             console.log(data);
             console.log(dataSet);
-            console.log(columns);
 
             const columnDefs = [
                 { field: "dates" , rowGroup: true},
@@ -99,20 +98,6 @@ var getScriptPromisify = (src) => {
 
               // create the grid passing in the div to use together with the columns & data we want to use
               new agGrid.Grid(eGridDiv, gridOptions);
-
-            /*
-            new gridjs.Grid({
-                columns: columns,
-                data: dataSet,
-                search: {
-                    enabled: true
-                },
-                pagination: {
-                    limit: 2
-                },
-                sort: true
-            }).render(this._root.querySelector('#example'));
-            */
 
         }
 
