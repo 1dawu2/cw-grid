@@ -86,7 +86,7 @@ var getScriptPromisify = (src) => {
 
             const columnDefs = [
                 { field: "dates" },
-                { field: "Volume" }
+                { field: "measure" }
               ];
           
               // specify the data
