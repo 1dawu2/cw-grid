@@ -11,6 +11,7 @@ var getScriptPromisify = (src) => {
     <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-theme-alpine.css">
     <div id="root" style="width: 100%; height: 100%;">
         <div id="placeholder">Grid Layout</div>
+        <button onclick="onBtExport()" style="margin-bottom: 5px; font-weight: bold;">Export to Excel</button>
         <div id="example" style="height: 100%; width:100%;" class="ag-theme-alpine"></div>
     </div>
  `;
@@ -28,6 +29,10 @@ var getScriptPromisify = (src) => {
             this._props = {}
         }
 
+        onBtExport() {
+            gridOptions.api.exportDataAsExcel();
+        }
+
         async render(resultSet) {
             await getScriptPromisify('https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.noStyle.js')
 
@@ -42,16 +47,6 @@ var getScriptPromisify = (src) => {
             const dates = []
             const values = []
             const dataSet = []
-            const columns = [
-                {
-                    id: "dates",
-                    name: "Date"
-                }, 
-                {
-                    id: 'measure',
-                    name: 'Volume'
-                }
-            ]
             console.log(resultSet);
             var tmpData = {}
             resultSet.forEach(dp => {
@@ -85,18 +80,17 @@ var getScriptPromisify = (src) => {
             console.log(columns);
 
             const columnDefs = [
-                { field: "dates" },
+                { field: "dates" , rowGroup: true},
                 { field: "measure" }
               ];
           
-              // specify the data
-              const rowData = [
-                { make: "Toyota", model: "Celica", price: 35000 },
-                { make: "Ford", model: "Mondeo", price: 32000 },
-                { make: "Porsche", model: "Boxter", price: 72000 }
-              ];
+
 
               const gridOptions = {
+                defaultColDef: {
+                    // set filtering on for all columns
+                    filter: true,
+                },
                 columnDefs: columnDefs,
                 rowData: dataSet
               };              
