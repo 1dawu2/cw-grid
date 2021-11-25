@@ -11,6 +11,7 @@ var getScriptPromisify = (src) => {
     <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-theme-alpine.css">
     <div id="root" style="width: 100%; height: 100%;">
         <div id="placeholder">Grid Layout</div>
+        <button onclick="onBtPrint()">Print</button>
         <div id="example" style="height: 100%; width:100%;" class="ag-theme-alpine"></div>
     </div>
  `;
@@ -74,23 +75,59 @@ var getScriptPromisify = (src) => {
             console.log(dataSet);
 
             const columnDefs = [
-                { field: "dates", rowGroup: true },
+                {
+                    field: "dates",
+                    menuTabs: ['filterMenuTab', 'generalMenuTab', 'columnsMenuTab'],
+                },
                 { field: "measure" }
             ];
 
 
 
             const gridOptions = {
+                sideBar: true,
+                statusBar: {
+                    statusPanels: [
+                        {
+                            statusPanel: 'agAggregationComponent',
+                            statusPanelParams: {
+                                // possible values are: 'count', 'sum', 'min', 'max', 'avg'
+                                aggFuncs: ['avg', 'sum']
+                            }
+                        }
+                    ]
+                },
                 defaultColDef: {
                     // set filtering on for all columns
                     filter: true,
                     flex: 1,
                     minWidth: 100,
                     resizable: true,
+                    editable: true,
+                    enableRowGroup: true,
+                    enablePivot: true,
+                    enableValue: true,
+                    sortable: true,
                 },
+                pagination: true,
+                paginationPageSize: 1,
+                rowSelection: 'multiple',
+                rowGroupPanelShow: 'always',
+                pivotPanelShow: 'always',
                 enableRangeSelection: true,
                 allowContextMenuWithControlKey: true,
-                getContextMenuItems: getContextMenuItems,
+                getContextMenuItems: [
+                    'copy',
+                    'separator',
+                    'chartRange',
+                    'export',
+                ],
+                enableCharts: true,
+                getChartToolbarItems: [
+                    'chartDownload',
+                    'chartData',
+                    'chartSettings',
+                ],
                 columnDefs: columnDefs,
                 rowData: dataSet
             };
@@ -101,32 +138,6 @@ var getScriptPromisify = (src) => {
             new agGrid.Grid(eGridDiv, gridOptions);
 
         }
-
-        getContextMenuItems(params) {
-            var result = [
-              {
-                // custom item
-                name: 'Alert ' + params.value,
-                action: function () {
-                  window.alert('Alerting about ' + params.value);
-                },
-                cssClasses: ['redFont', 'bold'],
-              },
-              {
-                // custom item
-                name: 'Always Disabled',
-                disabled: true,
-                tooltip:
-                  'Very long tooltip, did I mention that I am very long, well I am! Long!  Very Long!',
-              },              
-              'copy',
-              'separator',
-              'chartRange',
-              'export',
-            ];
-          
-            return result;
-          }
 
         onCustomWidgetResize(width, height) {
             this.render()
@@ -141,3 +152,20 @@ var getScriptPromisify = (src) => {
     }
     customElements.define("com-grid-main", GridWidget);
 })();
+
+function onBtPrint() {
+    const api = gridOptions.api;
+
+    setPrinterFriendly(api);
+
+    setTimeout(function () {
+        print();
+        setNormal(api);
+    }, 2000);
+}
+
+function setPrinterFriendly(api) {
+    const eGridDiv = document.querySelector('#myGrid');
+    eGridDiv.style.height = '';
+    api.setDomLayout('print');
+}
