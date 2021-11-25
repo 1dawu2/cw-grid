@@ -79,10 +79,15 @@ var getScriptPromisify = (src) => {
 
             const columnDefs = [
                 {
-                    field: "dates",
+                    field: 'dates',
+                    type: 'dateColumn',
+                    filter: 'agDateColumnFilter',
                     menuTabs: ['filterMenuTab', 'generalMenuTab', 'columnsMenuTab'],
                 },
-                { field: "measure" }
+                {
+                    field: 'measure',
+                    aggFunc: 'sum',
+                }
             ];
 
 
