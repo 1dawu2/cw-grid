@@ -7,7 +7,8 @@ var getScriptPromisify = (src) => {
 (function () {
     let template = document.createElement("template");
     template.innerHTML = `
-    <link href="https://cdn.jsdelivr.net/npm/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-grid.css">
+    <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-theme-alpine.css">
     <style>
     #root {
       background-color: #fff;
@@ -39,7 +40,7 @@ var getScriptPromisify = (src) => {
         }
 
         async render(resultSet) {
-            await getScriptPromisify('https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.umd.js')
+            await getScriptPromisify('https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.noStyle.js')
 
 
             this._placeholder = this._root.querySelector('#placeholder')
@@ -63,7 +64,7 @@ var getScriptPromisify = (src) => {
                 }
             ]
             console.log(resultSet);
-            var tmpData
+            var tmpData = {}
             resultSet.forEach(dp => {
                 const { rawValue, description } = dp[MEASURE_DIMENSION]
                 const date = dp.Date.description
@@ -94,6 +95,30 @@ var getScriptPromisify = (src) => {
             console.log(dataSet);
             console.log(columns);
 
+            const columnDefs = [
+                { field: "make" },
+                { field: "model" },
+                { field: "price" }
+              ];
+          
+              // specify the data
+              const rowData = [
+                { make: "Toyota", model: "Celica", price: 35000 },
+                { make: "Ford", model: "Mondeo", price: 32000 },
+                { make: "Porsche", model: "Boxter", price: 72000 }
+              ];
+
+              const gridOptions = {
+                columnDefs: columnDefs,
+                rowData: rowData
+              };              
+
+              const eGridDiv = this._root.querySelector('#example');
+
+              // create the grid passing in the div to use together with the columns & data we want to use
+              new agGrid.Grid(eGridDiv, gridOptions);
+
+            /*
             new gridjs.Grid({
                 columns: columns,
                 data: dataSet,
@@ -101,10 +126,11 @@ var getScriptPromisify = (src) => {
                     enabled: true
                 },
                 pagination: {
-                    limit: 1
+                    limit: 2
                 },
                 sort: true
             }).render(this._root.querySelector('#example'));
+            */
 
         }
 
