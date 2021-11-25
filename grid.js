@@ -11,7 +11,6 @@ var getScriptPromisify = (src) => {
     <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-theme-alpine.css">
     <div id="root" style="width: 100%; height: 100%;">
         <div id="placeholder">Grid Layout</div>
-        <button onclick="onBtExport()" style="margin-bottom: 5px; font-weight: bold;">Export to Excel</button>
         <div id="example" style="height: 100%; width:100%;" class="ag-theme-alpine"></div>
     </div>
  `;
@@ -27,10 +26,6 @@ var getScriptPromisify = (src) => {
             this._example = this._root.querySelector('#example')
 
             this._props = {}
-        }
-
-        onBtExport() {
-            gridOptions.api.exportDataAsExcel();
         }
 
         async render(resultSet) {
@@ -53,16 +48,16 @@ var getScriptPromisify = (src) => {
                 const { rawValue, description } = dp[MEASURE_DIMENSION]
                 const date = dp.Date.description
 
-                 tmpData = {
-                    "dates" : date,
-                    "measure" : rawValue
+                tmpData = {
+                    "dates": date,
+                    "measure": rawValue
                 }
 
                 dataSet.push(tmpData);
 
                 if (dates.indexOf(date) === -1) {
                     dates.push(date);
-                    
+
                 }
                 if (description === 'Volume') {
                     values.push(rawValue);
@@ -79,27 +74,59 @@ var getScriptPromisify = (src) => {
             console.log(dataSet);
 
             const columnDefs = [
-                { field: "dates" , rowGroup: true},
+                { field: "dates", rowGroup: true },
                 { field: "measure" }
-              ];
-          
+            ];
 
 
-              const gridOptions = {
+
+            const gridOptions = {
                 defaultColDef: {
                     // set filtering on for all columns
                     filter: true,
+                    flex: 1,
+                    minWidth: 100,
+                    resizable: true,
                 },
+                enableRangeSelection: true,
+                allowContextMenuWithControlKey: true,
+                getContextMenuItems: getContextMenuItems,
                 columnDefs: columnDefs,
                 rowData: dataSet
-              };              
+            };
 
-              const eGridDiv = this._root.querySelector('#example');
+            const eGridDiv = this._root.querySelector('#example');
 
-              // create the grid passing in the div to use together with the columns & data we want to use
-              new agGrid.Grid(eGridDiv, gridOptions);
+            // create the grid passing in the div to use together with the columns & data we want to use
+            new agGrid.Grid(eGridDiv, gridOptions);
 
         }
+
+        getContextMenuItems(params) {
+            var result = [
+              {
+                // custom item
+                name: 'Alert ' + params.value,
+                action: function () {
+                  window.alert('Alerting about ' + params.value);
+                },
+                cssClasses: ['redFont', 'bold'],
+              },
+              {
+                // custom item
+                name: 'Always Disabled',
+                disabled: true,
+                tooltip:
+                  'Very long tooltip, did I mention that I am very long, well I am! Long!  Very Long!',
+              },              
+              'copy',
+              'separator',
+              'chartRange',
+              'export',
+            ];
+          
+            return result;
+          }
 
         onCustomWidgetResize(width, height) {
             this.render()
