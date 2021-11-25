@@ -11,7 +11,7 @@ var getScriptPromisify = (src) => {
     <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-theme-alpine.css">
     <div id="root" style="width: 100%; height: 100%;">
         <div id="placeholder">Grid Layout</div>
-        <div id="example" style="height: 600px; width:500px;" class="ag-theme-alpine"></div>
+        <div id="example" style="height: 100%; width:100%;" class="ag-theme-alpine"></div>
     </div>
  `;
 
@@ -85,9 +85,8 @@ var getScriptPromisify = (src) => {
             console.log(columns);
 
             const columnDefs = [
-                { field: "make" },
-                { field: "model" },
-                { field: "price" }
+                { field: "dates" },
+                { field: "Volume" }
               ];
           
               // specify the data
@@ -99,7 +98,7 @@ var getScriptPromisify = (src) => {
 
               const gridOptions = {
                 columnDefs: columnDefs,
-                rowData: rowData
+                rowData: dataSet
               };              
 
               const eGridDiv = this._root.querySelector('#example');
