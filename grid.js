@@ -9,20 +9,9 @@ var getScriptPromisify = (src) => {
     template.innerHTML = `
     <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-grid.css">
     <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-theme-alpine.css">
-    <style>
-    #root {
-      background-color: #fff;
-    }
-    #placeholder {
-      padding-top: 1em;
-      text-align: center;
-      font-size: 1.5em;
-      color: white;
-    }
-    </style>
     <div id="root" style="width: 100%; height: 100%;">
         <div id="placeholder">Grid Layout</div>
-        <div id="example"></div>
+        <div id="example" style="height: 600px; width:500px;" class="ag-theme-alpine"></div>
     </div>
  `;
 
