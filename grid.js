@@ -23,14 +23,15 @@ var getScriptPromisify = (src) => {
             this._shadowRoot = this.attachShadow({ mode: 'open' })
             this._shadowRoot.appendChild(template.content.cloneNode(true))
 
-            this._root = this._shadowRoot.getElementById('root')
-            this._example = this._root.querySelector('#example')
+            this._root = this._shadowRoot.getElementById('root')            
 
             this._props = {}
         }
 
         async render(resultSet) {
-            await getScriptPromisify('https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.noStyle.js')
+            
+            await getScriptPromisify('https://unpkg.com/ag-grid-enterprise/dist/ag-grid-enterprise.min.noStyle.js')
+           // await getScriptPromisify('https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.noStyle.js')
 
 
             this._placeholder = this._root.querySelector('#placeholder')
@@ -38,6 +39,8 @@ var getScriptPromisify = (src) => {
                 this._root.removeChild(this._placeholder)
                 this._placeholder = null
             }
+
+            //this._example = this._root.querySelector('#example')
 
             const MEASURE_DIMENSION = 'Account'
             const dates = []
