@@ -7,8 +7,6 @@ var getScriptPromisify = (src) => {
 (function () {
     let template = document.createElement("template");
     template.innerHTML = `
-    <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-grid.css">
-    <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-theme-alpine.css">
     <div id="root" style="width: 100%; height: 100%;">
         <div id="placeholder">Grid Layout</div>
         <button onclick="onBtPrint()">Print</button>
