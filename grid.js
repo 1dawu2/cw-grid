@@ -110,12 +110,13 @@ var getScriptPromisify = (src) => {
                     sortable: true,
                 },
                 pagination: true,
-                paginationPageSize: 1,
-                rowSelection: 'multiple',
-                rowGroupPanelShow: 'always',
+                paginationPageSize: 10,
+                //rowSelection: 'multiple',
+                //rowGroupPanelShow: 'always',
                 pivotPanelShow: 'always',
-                enableRangeSelection: true,
+                //enableRangeSelection: true,
                 allowContextMenuWithControlKey: true,
+                /*
                 getContextMenuItems: [
                     'copy',
                     'separator',
@@ -128,6 +129,7 @@ var getScriptPromisify = (src) => {
                     'chartData',
                     'chartSettings',
                 ],
+                */
                 columnDefs: columnDefs,
                 rowData: dataSet
             };
@@ -151,21 +153,23 @@ var getScriptPromisify = (src) => {
         }
     }
     customElements.define("com-grid-main", GridWidget);
+
+    function onBtPrint() {
+        const api = gridOptions.api;
+    
+        setPrinterFriendly(api);
+    
+        setTimeout(function () {
+            print();
+            setNormal(api);
+        }, 2000);
+    }
+    
+    function setPrinterFriendly(api) {
+        const eGridDiv = document.querySelector('#myGrid');
+        eGridDiv.style.height = '';
+        api.setDomLayout('print');
+    }
+
 })();
 
-function onBtPrint() {
-    const api = gridOptions.api;
-
-    setPrinterFriendly(api);
-
-    setTimeout(function () {
-        print();
-        setNormal(api);
-    }, 2000);
-}
-
-function setPrinterFriendly(api) {
-    const eGridDiv = document.querySelector('#myGrid');
-    eGridDiv.style.height = '';
-    api.setDomLayout('print');
-}
