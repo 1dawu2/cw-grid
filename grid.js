@@ -20,18 +20,19 @@ var getScriptPromisify = (src) => {
     class GridWidget extends HTMLElement {
         constructor() {
             super();
+
+            this._shadowRoot = this.attachShadow({ mode: 'open' })
+            this._shadowRoot.appendChild(template.content.cloneNode(true))
+
+            this._root = this._shadowRoot.getElementById('root')        
+
             this._btnClick = this._root.querySelector('.btnClick')
             this._btnClick.addEventListener('click', function() {
                 onBtPrint();
             });
             let clickEvent = new Event('click');
             this._btnClick.dispatchEvent(clickEvent);
-
-            this._shadowRoot = this.attachShadow({ mode: 'open' })
-            this._shadowRoot.appendChild(template.content.cloneNode(true))
-
-            this._root = this._shadowRoot.getElementById('root')            
-
+            
             this._props = {}
         }
 
