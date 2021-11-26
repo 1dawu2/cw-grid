@@ -28,11 +28,11 @@ var getScriptPromisify = (src) => {
 
             this._btnClick = this._root.querySelector('.btnClick')
             this._btnClick.addEventListener('click', function() {
-                onBtPrint();
+                render();
             });
             let clickEvent = new Event('click');
             this._btnClick.dispatchEvent(clickEvent);
-            
+
             this._props = {}
         }
 
@@ -173,6 +173,10 @@ var getScriptPromisify = (src) => {
             // create the grid passing in the div to use together with the columns & data we want to use
             new agGrid.Grid(eGridDiv, gridOptions);
 
+            const api = gridOptions.api;
+    
+            setPrinterFriendly(api);
+
         }
 
         onCustomWidgetResize(width, height) {
@@ -187,22 +191,9 @@ var getScriptPromisify = (src) => {
         }
     }
     customElements.define("com-grid-main", GridWidget);
-
-    function onBtPrint() {
-        const api = gridOptions.api;
-    
-        setPrinterFriendly(api);
-    
-        /*
-        setTimeout(function () {
-            print();
-            setNormal(api);
-        }, 2000);
-        */
-    }
     
     function setPrinterFriendly(api) {
-        const eGridDiv = document.querySelector('#myGrid');
+        const eGridDiv = document.querySelector('#example');
         eGridDiv.style.height = '';
         api.setDomLayout('print');
     }
