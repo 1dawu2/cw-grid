@@ -21,6 +21,15 @@ var getScriptPromisify = (src) => {
         constructor() {
             super();
 
+            this.addEventListener("click", event => {
+                console.log('click');
+                this.dispatchEvent(new CustomEvent("onStart", {
+                    detail: {
+                        
+                    }
+                }));
+            });            
+
             this._shadowRoot = this.attachShadow({ mode: 'open' })
             this._shadowRoot.appendChild(template.content.cloneNode(true))
 
