@@ -12,7 +12,7 @@ var getScriptPromisify = (src) => {
     <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-theme-alpine.css">    
     <div id="root" style="width: 100%; height: 100%;">
         <div id="placeholder">Grid Layout</div>
-        <button onclick="onBtPrint()">Print</button>
+        <button class="btnClick">Print</button>
         <div id="example" style="height: 100%; width:100%;" class="ag-theme-alpine"></div>
     </div>
  `;
@@ -20,15 +20,12 @@ var getScriptPromisify = (src) => {
     class GridWidget extends HTMLElement {
         constructor() {
             super();
-
-            this.addEventListener("click", event => {
-                console.log('click');
-                this.dispatchEvent(new CustomEvent("onStart", {
-                    detail: {
-                        
-                    }
-                }));
-            });            
+            this._btnClick = this._root.querySelector('.btnClick')
+            this._btnClick.addEventListener('click', function() {
+                onBtPrint();
+            });
+            let clickEvent = new Event('click');
+            this._btnClick.dispatchEvent(clickEvent);
 
             this._shadowRoot = this.attachShadow({ mode: 'open' })
             this._shadowRoot.appendChild(template.content.cloneNode(true))
@@ -195,10 +192,12 @@ var getScriptPromisify = (src) => {
     
         setPrinterFriendly(api);
     
+        /*
         setTimeout(function () {
             print();
             setNormal(api);
         }, 2000);
+        */
     }
     
     function setPrinterFriendly(api) {
