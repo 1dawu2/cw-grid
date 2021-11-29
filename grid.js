@@ -28,7 +28,7 @@ var getScriptPromisify = (src) => {
 
             this._btnClick = this._root.querySelector('.btnClick')
             this._btnClick.addEventListener('click', function() {
-                render();
+
             });
             let clickEvent = new Event('click');
             this._btnClick.dispatchEvent(clickEvent);
